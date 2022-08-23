@@ -1,0 +1,12 @@
+<p class="navbar-text float-right">
+  <% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+  <%= button_to "All Products", products_path, method: :get %>
+  
+  <% else %>
+  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+  <% end %>
+</p>
+
+

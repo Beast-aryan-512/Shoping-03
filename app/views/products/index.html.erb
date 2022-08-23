@@ -1,0 +1,45 @@
+<fieldset>
+  <p id="notice"><%= notice %></p>
+
+  <h1>Products</h1>
+
+  <table class="table">
+    <thead class="table-primary"> 
+      <tr>
+        <th>Name</th>
+        <th>Discription</th>
+
+        <th>Price</th>
+
+        <th><% if current_user.has_role? :seller %></th>
+
+        <th colspan="3"></th>
+        <th><%end%></th>
+      </tr>
+    </thead>
+
+    <tbody class="table-success">
+      <% @products.each do |product| %>
+      <tr>
+        <td><h3 class="badge rounded-pill bg-success"><%= product.name %></td></h3>
+        <td><%= product.discription %></td>
+        <td><%= product.price %></td>
+        <td ><%= button_to 'Show', product, method: :get %></td>
+        <% if current_user.has_role? :seller %>
+        <td><%= button_to 'Edit', edit_product_path(product), method: :get %></td>
+        <td><%= button_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
+        <td></td><td></td>
+        <%end%>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <% if current_user.has_role? :seller %>
+    <p class="btn btn-warning"><%= link_to 'New Product', new_product_path, method: :get %></p>
+  <%end%>
+  <br>
+  <p class="btn btn-danger"><%= link_to "Back", root_path%></p>
+</fieldset>
